@@ -22,12 +22,18 @@ language可以为：
 
 ## 2021/10/14 Windows下makefile删除文件命令
 
-语句: del *filename*
+dos命令: del *filename*
 
 例: del $(BUILD_DIR) $(TARGET_DIR)
 
 ## 2021/10/14 Windows下makefile检查文件夹是否存在
 
-语句: if not exist *filename* mkdir *filename*
+dos命令: if not exist *filename* mkdir *filename*
 
 例: if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
+
+## 2021/10/15 Windows下makefile获取当前路径
+
+dos命令: echo %cd%
+
+例: TOP_DIR = $(shell echo %cd%)
