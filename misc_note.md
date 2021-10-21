@@ -37,3 +37,37 @@ dos命令: if not exist *filename* mkdir *filename*
 dos命令: echo %cd%
 
 例: TOP_DIR = $(shell echo %cd%)
+
+## 2021/10/20 GCC -mthumb 参数意思
+
+*-mthumb* 意思是生成目标文件为Thumb指令
+
+关于编译器参数可以查看keil官网文档: <https://www.keil.com/support/man/docs/armclang_ref/armclang_ref_chr1392632801932.htm>
+
+## 2021/10/20(1) 何为thumb指令
+
+thumb指令为arm指令的子集，1代thumb指令为16位宽，代码密度高，但是指令集不全，需要搭配arm指令使用，而2代thumb指令为32位宽，性能与arm指令相当，而且保留了一代指令的简介特性(无法确定是否不需要在搭配arm指令使用)。
+
+参考资料: <https://blog.csdn.net/zlmm741/article/details/105209734>
+
+## 2021/10/20(2) GCC -mcpu 参数意思
+
+命令: -mcpu=*name*
+
+指定何种处理器，name为指定的处理器,不能与-march(指定何种架构)同时使用。若要查看支持的处理器列表，使用命令: gcc -mcpu=list
+
+## 2021/10/20(3) GCC -mfpu 参数意思
+
+命令: -mfpu=*name*
+
+指定何种fpu架构，即可用的浮点硬件。若要查看支持的fpu列表，使用命令: gcc -mfpu=list
+
+## 2021/10/20(4) GCC -mfloat-abi 参数意思
+
+命令: -mfloat-abi=*value*
+
+是否使用硬件浮点或软件浮点。value可为: soft 使用软件浮点; softfp 软硬件浮点联动; hard 使用硬件浮点
+
+## 2021/10/20(5) GCC -fdata-sections -ffunction-sections 参数意思
+
+对于程序中未使用的变量或者函数，在链接阶段连接器将会去除，减小可执行文件的大小
