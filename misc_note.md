@@ -71,3 +71,17 @@ thumb指令为arm指令的子集，1代thumb指令为16位宽，代码密度高�
 ## 2021/10/20(5) GCC -fdata-sections -ffunction-sections 参数意思
 
 对于程序中未使用的变量或者函数，在链接阶段连接器将会去除，减小可执行文件的大小
+
+## 2021/10/25 GCC -c 参数意思
+
+只编译不链接
+
+## 2021/10/25 Makefile vpath 用法
+
+命令: vpath *pattern* *path*
+
+pattern为匹配模式，path为需要查找的路径
+
+例: vpath %.c ./  该命令就是在将当前文件夹下的后缀为c的文件添加到环境变量VPATH中
+
+Makefile官方文档: <https://www.gnu.org/software/make/manual/>
