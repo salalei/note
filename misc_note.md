@@ -106,3 +106,24 @@ Makefile官方文档: <https://www.gnu.org/software/make/manual/>
 首先参数 -Wl,option 是将option参数传递给链接程序，因此 -Wl 后面的参数都是链接程序的参数，该参数信息可在 <https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC5> 找到，也可以通过本地GUN工具链的help功能找到，例如: arm-none-eabi-ld --help  
 
 -Map=*filename* 是将链接映射输出到指定的文件中，--cref 是创建交叉引用表，如果已经在输出连接映射的文件，则交叉引用表也会输出到该文件中，否则输出到标准输出上，-u *symbol* 强制符号作为未定义符号输入到输出文件中，这样会触发标准库中附加模块的链接。
+
+## 2022/1/6 linux /etc/profile 文件作用
+
+操作系统为用户定制环境的一个文件，开机的时候会读取一次该文件，设置环境变量。
+
+扩展:
+    1. /etc/bashrc文件在打开bash shell时候执行一次。
+    2. ~/.profile 作用同上，为具体某个用户的配置文件
+    3. ~/.bashrc 作用同上，为具体某个用户的配置文件
+
+## 2021/1/6 source指令作用
+
+格式: source **filename**
+
+作用: 读取一次文件并执行，source在当前bash环境下执行命令
+
+## 2021/1/6(2) linux nmcli 命令使用
+
+无线查询: nmcli device wifi
+
+无线连接: nmcli device wifi connect **ssid** password **password**
