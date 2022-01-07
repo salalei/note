@@ -22,18 +22,23 @@ language可以为：
 
 ## 2021/10/14 Windows下makefile删除文件命令
 
-dos命令: del *filename*
+dos命令: del <u>filename</u>
 
-例: del $(BUILD_DIR) $(TARGET_DIR)
+例: del \$(BUILD_DIR) \$(TARGET_DIR)
 
 ## 2021/10/14 Windows下makefile检查文件夹是否存在
 
-dos命令: if not exist *filename* mkdir *filename*
+dos命令: if not exist <u>filename</u> mkdir <u>filename</u>
 
-例: if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
+例: if not exist \$(BUILD_DIR) mkdir \$(BUILD_DIR)
 
 ## 2021/10/15 Windows下makefile获取当前路径
 
 dos命令: echo %cd%
 
-例: TOP_DIR = $(shell echo %cd%)
+例: TOP_DIR = \$(shell echo %cd%)
+
+## 2021/10/15(1) ubuntu卸载软件
+
+shell命令: dpkg --purge <u>package</u>
+用 --purge 可以删除一切，包括setting和配置文件
