@@ -150,3 +150,15 @@ Makefile官方文档: <https://www.gnu.org/software/make/manual/>
 
 无线连接: nmcli device wifi connect **ssid** password **password**
 >>>>>>> b092a94a19ecc51b54096a8a4c9ce5be83e2cda8
+
+## 2021/1/9 命令行查看ubuntu版本
+
+命令: lsb_release -a
+
+## 2021/1/9(2) 解压缩7z压缩包
+
+命令: 7zr x **filename**，x为按压缩包原本目录解压缩
+
+## 2021/1/9(3) ssh登录 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED
+
+最近换了一个开发帮，ssh登录提示以上错误，经搜索提示公钥不对，将.ssh/known_hosts删除即可，当然最好使用ssh-keygen -R **ip**，清除域名
