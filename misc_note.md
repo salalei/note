@@ -42,6 +42,28 @@ language可以为：
 
 ## 2021/10/14 Windows下makefile删除文件命令
 
+<<<<<<< HEAD
+dos命令: del <u>filename</u>
+
+例: del \$(BUILD_DIR) \$(TARGET_DIR)
+
+## 2021/10/14 Windows下makefile检查文件夹是否存在
+
+dos命令: if not exist <u>filename</u> mkdir <u>filename</u>
+
+例: if not exist \$(BUILD_DIR) mkdir \$(BUILD_DIR)
+
+## 2021/10/15 Windows下makefile获取当前路径
+
+dos命令: echo %cd%
+
+例: TOP_DIR = \$(shell echo %cd%)
+
+## 2021/10/15(1) ubuntu卸载软件
+
+shell命令: dpkg --purge <u>package</u>
+用 --purge 可以删除一切，包括setting和配置文件
+=======
 dos命令: del *filename*  
 例: del $(BUILD_DIR) $(TARGET_DIR)
 
@@ -127,6 +149,7 @@ Makefile官方文档: <https://www.gnu.org/software/make/manual/>
 无线查询: nmcli device wifi
 
 无线连接: nmcli device wifi connect **ssid** password **password**
+<<<<<<< HEAD
 
 ## 2021/1/7 linux du 指令
 
@@ -135,3 +158,18 @@ du指令全称，disk usage
 常用指令:
 
 * du -csh **obj** 统计某一目录下的文件及文件夹大小，-c 可求出数据总和，-s 为对每个参数统计磁盘使用量，-h为人类可读的方式显示，-d **depth** 为指定搜索的深度
+=======
+>>>>>>> b092a94a19ecc51b54096a8a4c9ce5be83e2cda8
+
+## 2021/1/9 命令行查看ubuntu版本
+
+命令: lsb_release -a
+
+## 2021/1/9(2) 解压缩7z压缩包
+
+命令: 7zr x **filename**，x为按压缩包原本目录解压缩
+
+## 2021/1/9(3) ssh登录 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED
+
+最近换了一个开发帮，ssh登录提示以上错误，经搜索提示公钥不对，将.ssh/known_hosts删除即可，当然最好使用ssh-keygen -R **ip**，清除域名
+>>>>>>> ef1ef6ca021a4a759218333a10cf4356e8a79de3
