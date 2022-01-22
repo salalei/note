@@ -127,3 +127,11 @@ Makefile官方文档: <https://www.gnu.org/software/make/manual/>
 无线查询: nmcli device wifi
 
 无线连接: nmcli device wifi connect **ssid** password **password**
+
+## 2021/1/7 linux du 指令
+
+du指令全称，disk usage
+
+常用指令:
+
+* du -csh **obj** 统计某一目录下的文件及文件夹大小，-c 可求出数据总和，-s 为对每个参数统计磁盘使用量，-h为人类可读的方式显示，-d **depth** 为指定搜索的深度
