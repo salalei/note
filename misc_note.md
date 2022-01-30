@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQIUIRED True)
 target_compile_features(demo PUBLIC cxx_std_14)
 注意该命令是要在add_executable之后。
 
-cmake官方帮助文档：https://cmake.org/cmake/help/latest/index.html
+cmake官方帮助文档：<https://cmake.org/cmake/help/latest/index.html>
 
 ## 2021/9/22 设置minicom为16进制显示
 
@@ -42,28 +42,6 @@ language可以为：
 
 ## 2021/10/14 Windows下makefile删除文件命令
 
-<<<<<<< HEAD
-dos命令: del <u>filename</u>
-
-例: del \$(BUILD_DIR) \$(TARGET_DIR)
-
-## 2021/10/14 Windows下makefile检查文件夹是否存在
-
-dos命令: if not exist <u>filename</u> mkdir <u>filename</u>
-
-例: if not exist \$(BUILD_DIR) mkdir \$(BUILD_DIR)
-
-## 2021/10/15 Windows下makefile获取当前路径
-
-dos命令: echo %cd%
-
-例: TOP_DIR = \$(shell echo %cd%)
-
-## 2021/10/15(1) ubuntu卸载软件
-
-shell命令: dpkg --purge <u>package</u>
-用 --purge 可以删除一切，包括setting和配置文件
-=======
 dos命令: del *filename*  
 例: del $(BUILD_DIR) $(TARGET_DIR)
 
@@ -76,6 +54,11 @@ dos命令: if not exist *filename* mkdir *filename*
 
 dos命令: echo %cd%  
 例: TOP_DIR = $(shell echo %cd%)
+
+## 2021/10/15(1) ubuntu卸载软件
+
+shell命令: dpkg --purge <u>package</u>
+用 --purge 可以删除一切，包括setting和配置文件
 
 ## 2021/10/20 GCC -mthumb 参数意思
 
@@ -138,27 +121,95 @@ Makefile官方文档: <https://www.gnu.org/software/make/manual/>
     2. ~/.profile 作用同上，为具体某个用户的配置文件
     3. ~/.bashrc 作用同上，为具体某个用户的配置文件
 
-## 2021/1/6 source指令作用
+## 2022/1/6 source指令作用
 
 格式: source **filename**
 
 作用: 读取一次文件并执行，source在当前bash环境下执行命令
 
-## 2021/1/6(2) linux nmcli 命令使用
+## 2022/1/6(2) linux nmcli 命令使用
 
 无线查询: nmcli device wifi
 
 无线连接: nmcli device wifi connect **ssid** password **password**
->>>>>>> b092a94a19ecc51b54096a8a4c9ce5be83e2cda8
 
-## 2021/1/9 命令行查看ubuntu版本
+## 2022/1/9 命令行查看ubuntu版本
 
 命令: lsb_release -a
 
-## 2021/1/9(2) 解压缩7z压缩包
+## 2022/1/9(2) 解压缩7z压缩包
 
 命令: 7zr x **filename**，x为按压缩包原本目录解压缩
 
-## 2021/1/9(3) ssh登录 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED
+## 2022/1/9(3) ssh登录 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED
 
 最近换了一个开发帮，ssh登录提示以上错误，经搜索提示公钥不对，将.ssh/known_hosts删除即可，当然最好使用ssh-keygen -R **ip**，清除域名
+
+## 2022/1/30 ssh登录root用户时，即使密码正确也无法登录
+
+1. 保证 /etc/ssh/sshd_config 配置文件中有"PermitRootLogin yes"，以开启root登录许可，然后使用"service ssh restart"来重启服务
+2. 其次要保证root用户设置了密码，也就是要登录到root用户后用passwd命令设置密码，然后重启
+
+## 2022/1/30(2) nfs服务无法开启
+
+开启nfs提示错误
+
+```text
+Starting nfs-kernel-server (via systemctl): nfs-kernel-server.serviceA dependency job for nfs-server.service failed. See 'journalctl -xe' for details.
+```
+
+使用journal查看日志提示
+
+```text
+unknown filesystem type 'nfsd'
+```
+
+原因是内核不完整，需要重新配置内核，要勾上NFS client support、NFS server support和IP/TCP中的DHCP等，如下图
+
+![](./images/2022-01-30%2000-46-46%20的屏幕截图.png)
+
+![](images/2022-01-30%2023-56-27%20的屏幕截图.png)
+
+注: 在Edge-V这块开发板直接更新image并没有用
+
+## 2022/1/30(3) 添加和删除用户
+
+执行以上操作需要登录到root用户，不是通过sudo su登录，而是登出以后以root用户名登录。
+
+* 添加用户 adduser **user name**
+* 删除用户 deluser **user name**，如果还要删除文档，则为 deluser --remove-home **user name**
+
+## 2022/1/30(4) 使用 adduser 添加的用户不能使用 sudo su
+
+需要修改/etc/sudoers 加入
+
+```text
+admin ALL=(ALL) ALL
+```
+
+admin就是用户名，然后重启
+
+## 2022/1/30(5) ubuntu 修改计算机名
+
+命令: hostnamectl set-hostname **hostname**
+
+## 2022/1/30(6) 使用netplan设置静态ip
+
+需要安装 netplan 和 netplan.io
+
+然后需要添加一个/etc/netplan/*.yaml文件，加入以下内容
+
+```text
+network:
+    ethernets:
+        eth0:
+            dhcp4: no
+            addresses: [192.168.1.2/24]
+            gateway4: 192.168.1.1
+```
+
+然后使用命令 netplan apply 启动配置
+
+## 2022/1/30(7) 开发板ubuntu不能补全或者在sudo命令后不能补全
+
+需要安装 bash-completion，然后将电脑本地的 /etc/bash_completion.d/ 文件夹及内容全部复制到开发板的同目录下，最后重启。
