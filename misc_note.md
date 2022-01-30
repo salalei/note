@@ -40,12 +40,12 @@ language可以为：
         #linux
     endif
 
-## 2021/10/14 Windows下makefile删除文件命令
+## 2021/10/14(2) Windows下makefile删除文件命令
 
 dos命令: del *filename*  
 例: del $(BUILD_DIR) $(TARGET_DIR)
 
-## 2021/10/14 Windows下makefile检查文件夹是否存在
+## 2021/10/14(3) Windows下makefile检查文件夹是否存在
 
 dos命令: if not exist *filename* mkdir *filename*  
 例: if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
@@ -55,7 +55,7 @@ dos命令: if not exist *filename* mkdir *filename*
 dos命令: echo %cd%  
 例: TOP_DIR = $(shell echo %cd%)
 
-## 2021/10/15(1) ubuntu卸载软件
+## 2021/10/15(2) ubuntu卸载软件
 
 shell命令: dpkg --purge <u>package</u>
 用 --purge 可以删除一切，包括setting和配置文件
@@ -65,27 +65,27 @@ shell命令: dpkg --purge <u>package</u>
 *-mthumb* 意思是生成目标文件为Thumb指令  
 关于编译器参数可以查看官网文档: <https://gcc.gnu.org/onlinedocs/gcc-11.2.0/gcc/#toc-GCC-Command-Options>
 
-## 2021/10/20(1) 何为thumb指令
+## 2021/10/20(2) 何为thumb指令
 
 thumb指令为arm指令的子集，1代thumb指令为16位宽，代码密度高，但是指令集不全，需要搭配arm指令使用，而2代thumb指令为32位宽，性能与arm指令相当，而且保留了一代指令的简介特性(无法确定是否不需要在搭配arm指令使用)。  
 参考资料: <https://blog.csdn.net/zlmm741/article/details/105209734>
 
-## 2021/10/20(2) GCC -mcpu 参数意思
+## 2021/10/20(3) GCC -mcpu 参数意思
 
 命令: -mcpu=*name*  
 指定何种处理器，name为指定的处理器,不能与-march(指定何种架构)同时使用。若要查看支持的处理器列表，使用命令: gcc -mcpu=list
 
-## 2021/10/20(3) GCC -mfpu 参数意思
+## 2021/10/20(4) GCC -mfpu 参数意思
 
 命令: -mfpu=*name*  
 指定何种fpu架构，即可用的浮点硬件。若要查看支持的fpu列表，使用命令: gcc -mfpu=list
 
-## 2021/10/20(4) GCC -mfloat-abi 参数意思
+## 2021/10/20(5) GCC -mfloat-abi 参数意思
 
 命令: -mfloat-abi=*value*  
 是否使用硬件浮点或软件浮点。value可为: soft 使用软件浮点; softfp 软硬件浮点联动; hard 使用硬件浮点
 
-## 2021/10/20(5) GCC -fdata-sections -ffunction-sections 参数意思
+## 2021/10/20(6) GCC -fdata-sections -ffunction-sections 参数意思
 
 对于程序中未使用的变量或者函数，在链接阶段连接器将会去除，减小可执行文件的大小
 
@@ -93,7 +93,7 @@ thumb指令为arm指令的子集，1代thumb指令为16位宽，代码密度高�
 
 只编译不链接
 
-## 2021/10/25 Makefile vpath 用法
+## 2021/10/25(2) Makefile vpath 用法
 
 命令: vpath *pattern* *path*  
 pattern为匹配模式，path为需要查找的路径  
@@ -106,7 +106,7 @@ Makefile官方文档: <https://www.gnu.org/software/make/manual/>
 
 -a 是指请求高级、汇编、符号列表，具体意思也不太清楚，后面的dlms是组合在一起的参数，分开来的话就是 -ad: 列表中省略调试指令的选项；-al: 请求输出程序汇编列表；-am: 请求包含宏拓展；-as: 请求输出符号列表。后面的filenames是输出列表文件的名称，生成的其实就是.lst文件。
 
-## 2021/10/27(1) GCC -Wl,-Map=*filename*,--cref,--gc-sections,-u,_printf_float,-lc,-lm,-lnosys,-lrdimon 参数意思
+## 2021/10/27(2) GCC -Wl,-Map=*filename*,--cref,--gc-sections,-u,_printf_float,-lc,-lm,-lnosys,-lrdimon 参数意思
 
 首先参数 -Wl,option 是将option参数传递给链接程序，因此 -Wl 后面的参数都是链接程序的参数，该参数信息可在 <https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_mono/ld.html#SEC5> 找到，也可以通过本地GUN工具链的help功能找到，例如: arm-none-eabi-ld --help  
 
@@ -121,17 +121,25 @@ Makefile官方文档: <https://www.gnu.org/software/make/manual/>
     2. ~/.profile 作用同上，为具体某个用户的配置文件
     3. ~/.bashrc 作用同上，为具体某个用户的配置文件
 
-## 2022/1/6 source指令作用
+## 2022/1/6(2) source指令作用
 
 格式: source **filename**
 
 作用: 读取一次文件并执行，source在当前bash环境下执行命令
 
-## 2022/1/6(2) linux nmcli 命令使用
+## 2022/1/6(3) linux nmcli 命令使用
 
 无线查询: nmcli device wifi
 
 无线连接: nmcli device wifi connect **ssid** password **password**
+
+## 2021/1/7 linux du 指令
+
+du指令全称，disk usage
+
+常用指令:
+
+* du -csh **obj** 统计某一目录下的文件及文件夹大小，-c 可求出数据总和，-s 为对每个参数统计磁盘使用量，-h为人类可读的方式显示，-d **depth** 为指定搜索的深度
 
 ## 2022/1/9 命令行查看ubuntu版本
 
